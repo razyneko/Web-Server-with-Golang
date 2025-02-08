@@ -19,12 +19,12 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	address := r.FormValue("address")
 
-	// Resposne with submitted data
+	// Response with submitted data
 	fmt.Fprintf(w, "Thank You for submitting the form :)\n")
 	fmt.Fprintf(w, "Name = %s\n", name)
 	fmt.Fprintf(w, "Address = %s\n", address)
 
-	//fmt.Fprintf is often used to send a formatted response to the client via an http.ResponseWriter.(w) 
+	//fmt.Fprintf is often used to send a formatted response to the client via an http.ResponseWriter(w) 
 	//it returns the number of bytes written
 }
 
@@ -51,14 +51,14 @@ func main() {
 	fileserver := http.FileServer(http.Dir("./static")) 
 	// What it does: This serves static files from the static directory. Any file in this directory can be accessed via the root route (/). For example, index.html and form.html can be accessed by visiting /index.html and /form.html in the browser.
 
-	// Set up routes
+	// Set up routes 
 
 	http.Handle("/", fileserver)  // Serve static files at root
 	http.HandleFunc("/hello", helloHandler) // hanlde /hello request
 	http.HandleFunc("/form", FormHandler) // handle form request
 
 	// Start the server and listen for incoming requests
-	fmt.Println("Starting server on port 8080...")
+	fmt.Println("Starting server on port 8000...")
 	log.Fatalf("Server failed: %v", http.ListenAndServe(":8000", nil))
 
 	// nil: Tells the server to use the default HTTP request multiplexer (http.DefaultServeMux) to handle incoming requests.
